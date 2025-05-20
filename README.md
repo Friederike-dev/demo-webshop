@@ -8,12 +8,7 @@ This project is intended for demo purposes and is not licensed for commercial us
 ## Table of Contents
 - [Features](#features)
 - [Technologies](#technologies)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Available Scripts](#available-scripts)
-- [Planned Features](#planned-features)
-- [License](#license)
+- [Prerequisites](#prerequisites)
 
 ---
 
@@ -37,7 +32,7 @@ This project is intended for demo purposes and is not licensed for commercial us
 ---
 
 
-### Prerequisites
+## Prerequisites
 
 - **Node.js** (Version 16 or higher recommended)
 - **npm** (comes with Node.js)

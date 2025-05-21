@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import About from "./About";
 import Checkout from "./Checkout";
 import { initializeCategoryStates } from "../logic/categoryLogic";
+import { filterCards, sortCards } from "../logic/filterSortLogic";
 
 function App() {
   // **State-Management**
@@ -116,56 +117,7 @@ function App() {
     setCards(allCards); // Set the cards in the state
   }, []);
 
-  // **Filter Cards**
-  function filterCards(
-    cards,
-    selectedMainCategories,
-    selectedSubCategoryStates
-  ) {
-    // Check if at least one main category is active
-    const hasActiveMainCategory = Object.values(selectedMainCategories).some(
-      (isActive) => isActive
-    );
-
-    if (!hasActiveMainCategory) {
-      return []; // Return an empty array if no main categories are active
-    }
-
-    return cards.filter((card) => {
-      const isMainCategorySelected = selectedMainCategories[card.category]; // Check if the main category is selected
-      const isSubCategorySelected =
-        selectedSubCategoryStates[card.category]?.[card.subCategory]; // Check if the sub-category is selected
-
-      return isMainCategorySelected && isSubCategorySelected; // Return cards that match both conditions
-    });
-  }
-
-  // **Sort Cards**
-  function sortCards(cards, sortOption) {
-    switch (sortOption) {
-      case "poetry":
-        return cards.filter((card) => card.subCategory === "poetry"); // Filter cards by "poetry"
-      case "prose":
-        return cards.filter((card) => card.subCategory === "prose"); // Filter cards by "prose"
-      case "travel-guide":
-        return cards.filter((card) => card.subCategory === "travel-guide"); // Filter cards by "travel-guide"
-      case "history":
-        return cards.filter((card) => card.subCategory === "history"); // Filter cards by "history"
-      case "price ascending":
-        return [...cards].sort(
-          (a, b) => parseFloat(a.price) - parseFloat(b.price)
-        ); // Sort cards by price in ascending order
-      case "price descending":
-        return [...cards].sort(
-          (a, b) => parseFloat(b.price) - parseFloat(a.price)
-        ); // Sort cards by price in descending order
-      case "alphabetical":
-        return [...cards].sort((a, b) => a.title.localeCompare(b.title)); // Sort cards alphabetically by title
-      default:
-        return cards; // Return the cards as-is if no valid sort option is selected
-    }
-  }
-
+  
   // **Apply Filtering and Sorting Logic**
   const filteredCards = filterCards(
     cards,
